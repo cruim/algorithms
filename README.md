@@ -2,7 +2,7 @@
 
 ## Table of contents
 
-- [Tree Traversals](#tree_traversals)
+- [Tree Traversals](#tree-traversals)
     - [Preorder Traversal](#preorder)
     - [Inorder Traversal](#inorder)
     - [Postorder Traversal](#postorder)
@@ -19,4 +19,4 @@
 - [Prefix Sum](#prefix_sum)
 
 
-### <a name="#tree-traversals"></a>Tree Traversals
+### Tree Traversals
