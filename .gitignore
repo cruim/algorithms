@@ -1,3 +1,7 @@
 __pycache__/
 .idea/
 venv/
+
+
+
+git remote set-url origin https://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@github.com/cruim/algorithms.git
