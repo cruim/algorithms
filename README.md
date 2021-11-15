@@ -19,4 +19,4 @@
 - [Prefix Sum](#prefix_sum)
 
 
-### <a name="#tree_traversals"></a>Tree Traversals
+### <a name="#tree-traversals"></a>Tree Traversals
