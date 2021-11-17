@@ -8,7 +8,7 @@
     - [Postorder Traversal](#postorder-traversal)
     - [Level Traversal](#level-traversal)
     
-- [Breadth First Search](#bfs)
+- [Breadth First Search](#breadth-first-search)
 - [Depth First Search](#dfs)
 - [Dijkstra algorithm](#dijkstra)
 - [Linked List](#linked_list)
@@ -112,4 +112,47 @@ def level_traversal(root) -> List[List[int]]:
       result.append(level)
       
   return result
+```
+
+### Breadth First Search
+The idea is exploring the nearest neighbours using `queue`. Good tool for searching shortest path on undirected and
+unweighted graph.
+```python
+from queue import Queue
+
+
+def bfs(grid: List[List[int]]) -> int:
+    
+    def get_neighbours(i, j):
+        lst = []
+        for x, y in [(i+x, j) for x in (-1, 1)] + [(i, j+y) for y in (-1, 1)]:
+          if 0 <= x < len(grid) and 0 <= y < len(grid[0]):
+            lst.append((x, y))
+        return lst
+    
+    adj_lst = {}
+    steps = {}
+    
+    for i in range(len(grid)):
+      for j in range(len(grid[0])):
+        adj_lst[(i, j)] = get_neighbours(i, j)
+        steps[(i, j)] = -1
+        
+    queue = Queue()
+    start = (0, 0)
+    end = (len(grid)-1, len(grid[0])-1)
+    queue.put(start)
+    visited = set()
+    steps[start] = 0
+    
+    while not queue.empty():
+      node = queue.get()
+      for nei in adj_lst[node]:
+        if nei not in visited:
+          steps[nei] = steps[node] + 1
+          visited.add(nei)
+          queue.put(nei)
+          
+    return steps[end]
+
 ```
