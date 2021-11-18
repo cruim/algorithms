@@ -9,7 +9,7 @@
     - [Level Traversal](#level-traversal)
     
 - [Breadth First Search](#breadth-first-search)
-- [Depth First Search](#dfs)
+- [Depth First Search](#depth-first-search)
 - [Dijkstra algorithm](#dijkstra)
 - [Linked List](#linked_list)
 - [Trie](#trie)
@@ -155,4 +155,45 @@ def bfs(grid: List[List[int]]) -> int:
           
     return steps[end]
 
+```
+
+### Depth First Search
+The idea is to get in destination point as soon as possible using `stack`. Good tool for collecting all paths. 
+```python
+def dfs(grid: List[List[int]]) -> List:
+    def get_neighbours(i, j):
+        lst = []
+        for x, y in [(i+x, j) for x in (-1, 1)] + [(i, j+y) for y in (-1, 1)]:
+          if 0 <= x < len(grid) and 0 <= y < len(grid[0]):
+            lst.append((x, y))
+        return lst
+    
+    adj_lst = {}
+    
+    for i in range(len(grid)):
+          for j in range(len(grid[0])):
+            adj_lst[(i, j)] = get_neighbours(i, j)
+    
+    start = (0, 0)
+    end = (len(grid)-1, len(grid[0])-1)
+    visited = set()
+    result = []
+    path = []
+
+    def _dfs(start, end, visited, path):
+        path.append(start)
+        visited.add(start)
+        if start == end:
+          result.append(path.copy())
+        else:
+          for nei in adj_lst[start]:
+            if nei not in visited:
+              _dfs(nei, end, visited, path)
+              
+        path.pop()
+        visited.discard(start)
+        
+    _dfs(start, end, visited, path)
+    
+    return result
 ```
