@@ -11,12 +11,14 @@
 - [Breadth First Search](#breadth-first-search)
 - [Depth First Search](#depth-first-search)
 - [Dijkstra algorithm](#dijkstra)
-- [Linked List](#linked_list)
+- [Linked List](#linked-list)
 - [Trie](#trie)
-- [Binary Search](#bin_search)
-    - [Binary Search(Rotated)](#bin_search_rotated)
+- [Binary Search](#binary-search)
+    - [Binary Search(Rotated)](#binary-search-rotated)
     
-- [Prefix Sum](#prefix_sum)
+- [Prefix Sum](#prefix-sum)
+- [Longest Common Subsequence](#longest-common-subsequence)
+- [Longest increasing subsequence](#longest-increasing-subsequence)
 
 
 ### Tree Traversals
@@ -196,4 +198,22 @@ def dfs(grid: List[List[int]]) -> List:
     _dfs(start, end, visited, path)
     
     return result
+```
+
+### Binary Search
+Searching on sorted array, `O(log(n))`
+```python
+def binary_search(nums, value):
+    low = 0
+    high = len(nums) - 1
+    while low <= high:
+      mid = (low + high) // 2
+      if nums[mid] == value:
+        return mid
+      elif value < nums[mid]:
+        high = mid - 1
+      else:
+        low = mid + 1
+        
+    return -1
 ```
