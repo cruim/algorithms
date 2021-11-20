@@ -248,3 +248,20 @@ def lsc(A: str, B: str) -> int:
           
     return grid[-1][-1]
 ```
+
+### Longest Increasing subsequence
+```python
+from bisect import bisect_left
+
+
+def lis(nums: List[int]) -> int:
+    tmp = []
+    for i in nums:
+      x = bisect_left(nums, i)
+      if x == len(tmp):
+        tmp.append(i)
+      elif i < tmp[x]:
+          tmp[x] = i
+    
+    return len(tmp)
+```
