@@ -14,7 +14,7 @@
 - [Linked List](#linked-list)
 - [Trie](#trie)
 - [Binary Search](#binary-search)
-    - [Binary Search(Rotated)](#binary-search-rotated)
+- [Binary Search Rotated](#binary-search-rotated)
     
 - [Prefix Sum](#prefix-sum)
 - [Longest Common Subsequence](#longest-common-subsequence)
@@ -216,6 +216,28 @@ def binary_search(nums, value):
       else:
         low = mid + 1
         
+    return -1
+```
+
+### Binary Search Rotated
+```python
+def bin_search_rotated(nums: List[int], target: int) -> int:
+    start = 0
+    end = len(nums) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if nums[mid] == target:
+            return mid
+        if nums[start] <= target <= nums[mid]:
+            end = mid - 1
+        elif nums[mid] <= target <= nums[end]:
+            start = mid + 1
+        elif nums[end] <= nums[mid]:
+            start = mid + 1
+        elif nums[mid] <= nums[start]:
+            end = mid - 1
+        else:
+            return -1
     return -1
 ```
 
