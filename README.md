@@ -18,7 +18,7 @@
     
 - [Prefix Sum](#prefix-sum)
 - [Longest Common Subsequence](#longest-common-subsequence)
-- [Longest increasing subsequence](#longest-increasing-subsequence)
+- [Longest Increasing subsequence](#longest-increasing-subsequence)
 - [Levenshtein distance](#levenshtein-distance)
 
 
@@ -233,4 +233,18 @@ def levenshtein_distance(A: str, B: str) -> int:
           grid[i][j] = 1 + min(grid[i-1][j], grid[i][j-1], grid[i-1][j-1])
           
     return grid[len(A)][len(B)]
+```
+
+### Longest Common Subsequence
+```python
+def lsc(A: str, B: str) -> int:
+    grid = [[0] * (len(B)+1) for _ in range(len(A)+1)]
+    for i in range(1, len(A)+1):
+      for j in range(len(B)+1):
+        if A[i-1] == B[j-1]:
+          grid[i][j] = 1 + grid[i-1][j-1]
+        else:
+          grid[i][j] = max(grid[i-1][j], grid[i][j-1])
+          
+    return grid[-1][-1]
 ```
