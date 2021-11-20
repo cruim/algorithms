@@ -10,7 +10,7 @@
     
 - [Breadth First Search](#breadth-first-search)
 - [Depth First Search](#depth-first-search)
-- [Dijkstra algorithm](#dijkstra)
+- [Dijkstra algorithm](#dijkstra-algorithm)
 - [Linked List](#linked-list)
 - [Trie](#trie)
 - [Binary Search](#binary-search)
@@ -264,4 +264,44 @@ def lis(nums: List[int]) -> int:
           tmp[x] = i
     
     return len(tmp)
+```
+
+### Dijkstra algorithm
+```python
+from heapq import heappush, heappop
+
+
+def dijkstra(grid: List[List[int]]) -> int:
+    
+    def get_neighbours(i, j):
+        lst = []
+        for x, y in [(i+x, j) for x in (-1, 1)] + [(i, j+y) for y in (-1, 1)]:
+          if 0 <= x < len(grid) and 0 <= y < len(grid[0]):
+            lst.append((grid[x][y], (x, y)))
+        return lst
+    
+    adj_lst = {}
+    
+    for i in range(len(grid)):
+          for j in range(len(grid[0])):
+            adj_lst[(i, j)] = get_neighbours(i, j)
+            
+    start = (0, 0)
+    goal = (len(grid)-1, len(grid[0])-1)
+    queue = []
+    heappush(queue, (0, start))
+    cost_visited = {start: grid[0][0]}
+    
+    while queue:
+            _, cur_node = heappop(queue)
+            if cur_node == goal:
+                break
+            for neighbour in adj_lst[cur_node]:
+                neigh_cost, neigh_node = neighbour
+                actual_cost = neigh_cost + cost_visited[cur_node]
+                if neigh_node not in cost_visited or actual_cost < cost_visited[neigh_node]:
+                    cost_visited[neigh_node] = actual_cost
+                    heappush(queue, (actual_cost, neigh_node))
+                    
+    return cost_visited[goal]
 ```
