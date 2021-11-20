@@ -19,6 +19,7 @@
 - [Prefix Sum](#prefix-sum)
 - [Longest Common Subsequence](#longest-common-subsequence)
 - [Longest increasing subsequence](#longest-increasing-subsequence)
+- [Levenshtein distance](#levenshtein-distance)
 
 
 ### Tree Traversals
@@ -216,4 +217,20 @@ def binary_search(nums, value):
         low = mid + 1
         
     return -1
+```
+
+### Levenshtein distance
+Using to find minimum numbers of edits to make first string from second. Available edits:
+_(Replace character, Insert character, Remove character)_
+```python
+def levenshtein_distance(A: str, B: str) -> int:
+    grid = [[(i+j) if not i*j else 0 for j in range(len(B)+1)] for i in range(len(A)+1)]
+    for i in range(1, len(A)+1):
+      for j in range(1, len(B)+1):
+        if A[i-1] == B[j-1]:
+          grid[i][j] = grid[i-1][j-1]
+        else:
+          grid[i][j] = 1 + min(grid[i-1][j], grid[i][j-1], grid[i-1][j-1])
+          
+    return grid[len(A)][len(B)]
 ```
