@@ -179,25 +179,25 @@ def dfs(grid: List[List[int]]) -> List:
     
     start = (0, 0)
     end = (len(grid)-1, len(grid[0])-1)
-    visited = set()
+    visited = {start}
     result = []
+    stack = [start]
     path = []
-
-    def _dfs(start, end, visited, path):
-        path.append(start)
-        visited.add(start)
-        if start == end:
-          result.append(path.copy())
-        else:
-          for nei in adj_lst[start]:
-            if nei not in visited:
-              _dfs(nei, end, visited, path)
-              
-        path.pop()
-        visited.discard(start)
-        
-    _dfs(start, end, visited, path)
     
+    while stack:
+      node = stack.pop()
+      path.append(node)
+      if node == end:
+        result.append(path.copy())
+      else:
+        for nei in adj_lst[node]:
+          if nei not in visited:
+            visited.add(nei)
+            stack.append(nei)
+                  
+      path.pop()
+      visited.discard(node)
+                    
     return result
 ```
 
