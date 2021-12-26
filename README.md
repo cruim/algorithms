@@ -11,6 +11,7 @@
 - [Breadth First Search](#breadth-first-search)
 - [Depth First Search](#depth-first-search)
 - [Dijkstra algorithm](#dijkstra-algorithm)
+- [Topological sorting](#topological-sorting)
 - [Linked List](#linked-list)
 - [Trie](#trie)
 - [Binary Search](#binary-search)
@@ -326,4 +327,40 @@ def dijkstra(grid: List[List[int]]) -> int:
                     heappush(queue, (actual_cost, neigh_node))
                     
     return cost_visited[goal]
+```
+
+### Topological sorting
+The node which hasn't any incomes calls _source_. The node which hasn't any outcomes call _sink_.
+If we have nodes **U** and **V** and there is a route from **U** to **V** than **U** will be before than **V** in sorting.
+First build _adj_lst_ and _income_count_ where key will be a node and value count of incomes. Then put into queue all sources.
+If count of nodes in final sorting less than total nodes count it means that some nodes inside loops.
+
+```python
+from queue import Queue
+
+
+def canFinish(num: int, prerequisites: List[List[int]]) -> bool:
+        adj_lst, income_count = {}, {}
+        
+        for child, parent in prerequisites:
+            adj_lst.setdefault(parent, []).append(child)
+            income_count[child] = income_count.get(child, 0) + 1
+            
+        queue = Queue()
+            
+        for i in range(num):
+            if i not in income_count:
+                queue.put(i)
+                
+        topological_sorting = []
+        
+        while not queue.empty():
+            node = queue.get()
+            topological_sorting.append(node)
+            for child in adj_lst.get(node, []):
+                income_count[child] -= 1
+                if not income_count[child]:
+                    queue.put(child)
+                    
+        return num == len(topological_sorting)
 ```
