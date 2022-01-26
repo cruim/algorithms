@@ -290,6 +290,8 @@ def lis(nums: List[int]) -> int:
 ```
 
 ### Dijkstra algorithm
+The main idea is use **heap** for storing costs for all nodes in not decreasing order. Also we heave **cost_visited** dictionary where we store
+cost for arrived current node, it could be changed if we found way with less cost.
 ```python
 from heapq import heappush, heappop
 
@@ -311,12 +313,12 @@ def dijkstra(grid: List[List[int]]) -> int:
             
     start = (0, 0)
     goal = (len(grid)-1, len(grid[0])-1)
-    queue = []
-    heappush(queue, (0, start))
+    heap = []
+    heappush(heap, (0, start))
     cost_visited = {start: grid[0][0]}
     
-    while queue:
-            _, cur_node = heappop(queue)
+    while heap:
+            _, cur_node = heappop(heap)
             if cur_node == goal:
                 break
             for neighbour in adj_lst[cur_node]:
@@ -324,7 +326,7 @@ def dijkstra(grid: List[List[int]]) -> int:
                 actual_cost = neigh_cost + cost_visited[cur_node]
                 if neigh_node not in cost_visited or actual_cost < cost_visited[neigh_node]:
                     cost_visited[neigh_node] = actual_cost
-                    heappush(queue, (actual_cost, neigh_node))
+                    heappush(heap, (actual_cost, neigh_node))
                     
     return cost_visited[goal]
 ```
