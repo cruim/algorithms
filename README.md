@@ -366,3 +366,33 @@ def canFinish(num: int, prerequisites: List[List[int]]) -> bool:
                     
         return num == len(topological_sorting)
 ```
+
+### Trie
+When we insert new word into **trie** we get structure like this 
+```python
+{'d': {'a': {'d': {'#': '#'}}}, 'p': {'a': {'d': {'#': '#'}}}}
+```
+There ar words
+dad and pad. Here every symbol is a key and their value is a dict with possible next symbols and symbol **#** if it is the end of the word.
+
+```python
+class Trie:
+
+    def __init__(self):
+        self.trie = {}
+
+    def insert(self, word: str) -> None:
+        tmp = self.trie
+        for ch in word:
+            tmp = tmp.setdefault(ch, {})
+        else:
+            tmp["$"] = "$"
+
+    def search(self, word: str) -> bool:
+        tmp = self.trie
+        for ch in word:
+            tmp = tmp.get(ch)
+            if not tmp:
+                return False
+        return "$" in tmp
+```
