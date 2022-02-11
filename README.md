@@ -280,7 +280,7 @@ from bisect import bisect_left
 def lis(nums: List[int]) -> int:
     tmp = []
     for i in nums:
-      x = bisect_left(nums, i)
+      x = bisect_left(tmp, i)
       if x == len(tmp):
         tmp.append(i)
       elif i < tmp[x]:
