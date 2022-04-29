@@ -16,11 +16,12 @@
 - [Trie](#trie)
 - [Binary Search](#binary-search)
 - [Binary Search Rotated](#binary-search-rotated)
-    
+
 - [Prefix Sum](#prefix-sum)
 - [Longest Common Subsequence](#longest-common-subsequence)
 - [Longest Increasing subsequence](#longest-increasing-subsequence)
 - [Levenshtein distance](#levenshtein-distance)
+- [Catalan number](#catalan-number)
 
 
 ### Tree Traversals
@@ -395,4 +396,9 @@ class Trie:
             if not tmp:
                 return False
         return "$" in tmp
+```
+
+### Catalan Number
+```python
+Cn = (2n)! / n!(n+1)!
 ```
