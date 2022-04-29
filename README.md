@@ -402,3 +402,22 @@ class Trie:
 ```python
 Cn = (2n)! / n!(n+1)!
 ```
+#### c++
+```python
+unsigned long long catalan(int N)
+{
+    //used to store catalan numbers
+    unsigned long long nums[N+1];
+
+    nums[0]=nums[1]=1;
+    int i,j;
+
+    for(i=2;i<=N;i++)
+    {
+        nums[i]=0;
+        for(j=0;j<i;j++)
+            nums[i]+=nums[j]*nums[i-j-1];
+    }
+    return nums[N];
+}
+```
