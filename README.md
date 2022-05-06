@@ -293,15 +293,15 @@ def lis(nums: List[int]) -> int:
 ```python
 int lengthOfLIS(vector<int>& nums) {
         vector<int> res;
-            for (auto x: nums) {
-                int i = lower_bound(res.begin(), res.end(), x) - res.begin();
-                if (i == res.size()) {
-                    res.push_back(x);
-                }
-                else {
-                    res[i] = x;
-                }
+        for (auto x: nums) {
+            int i = lower_bound(res.begin(), res.end(), x) - res.begin();
+            if (i == res.size()) {
+                res.push_back(x);
             }
+            else {
+                res[i] = x;
+            }
+        }
         
         return res.size();
     }
