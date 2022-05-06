@@ -290,6 +290,23 @@ def lis(nums: List[int]) -> int:
     return len(tmp)
 ```
 
+```python
+int lengthOfLIS(vector<int>& nums) {
+        vector<int> res;
+            for (auto x: nums) {
+                int i = lower_bound(res.begin(), res.end(), x) - res.begin();
+                if (i == res.size()) {
+                    res.push_back(x);
+                }
+                else {
+                    res[i] = x;
+                }
+            }
+        
+        return res.size();
+    }
+```
+
 ### Dijkstra algorithm
 The main idea is use **heap** for storing costs for all nodes in not decreasing order. Also we heave **cost_visited** dictionary where we store
 cost for arrived current node, it could be changed if we found way with less cost.
