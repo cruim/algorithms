@@ -22,6 +22,7 @@
 - [Longest Increasing subsequence](#longest-increasing-subsequence)
 - [Levenshtein distance](#levenshtein-distance)
 - [Catalan number](#catalan-number)
+- [Matrix Multiplication](#matrix-multiplication)
 
 
 ### Tree Traversals
@@ -447,4 +448,16 @@ unsigned long long catalan(int N)
     }
     return nums[N];
 }
+```
+
+### Matrix multiplication
+```python
+def multiply(mat1: List[List[int]], mat2: List[List[int]]) -> List[List[int]]:
+      x, y, z = len(mat1), len(mat1[0]), len(mat2[0])
+      grid = [[0] * z for _ in range(x)]
+      for i in range(x):
+          for j in range(z):
+              for k in range(y):
+                  grid[i][j] += mat1[i][k] * mat2[k][j]
+      return grid
 ```
