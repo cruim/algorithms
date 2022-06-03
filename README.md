@@ -24,6 +24,7 @@
 - [Catalan number](#catalan-number)
 - [Matrix Multiplication](#matrix-multiplication)
 - [Union Find](#union-find)
+- [Segment Tree](#segment-tree)
 
 
 ### Tree Traversals
@@ -468,19 +469,14 @@ def multiply(mat1: List[List[int]], mat2: List[List[int]]) -> List[List[int]]:
 class UnionFind:
     def __init__(self, size):
         self.root = [i for i in range(size)]
-        # Use a rank array to record the height of each vertex, i.e., the "rank" of each vertex.
-        # The initial "rank" of each vertex is 1, because each of them is
-        # a standalone vertex with no connection to other vertices.
         self.rank = [1] * size
 
-    # The find function here is the same as that in the disjoint set with path compression.
     def find(self, x):
         if x == self.root[x]:
             return x
         self.root[x] = self.find(self.root[x])
         return self.root[x]
 
-    # The union function with union by rank
     def union(self, x, y):
         rootX = self.find(x)
         rootY = self.find(y)
@@ -495,4 +491,45 @@ class UnionFind:
 
     def connected(self, x, y):
         return self.find(x) == self.find(y)
+```
+
+### Segment Tree
+
+```python
+class SegmentTree:
+
+    def __init__(self, nums):
+        n = len(nums)
+        self.n = n if not (n & (n - 1)) else int("1" + "0" * (len(bin(n)) - 2), 2)
+        self.segment_tree = [0] * (2 * self.n)
+        for i in range(len(nums)):
+            self.segment_tree[self.n + i] = nums[i]
+
+        for i in range(self.n - 1, 0, -1):
+            self.segment_tree[i] = self.segment_tree[i * 2] + self.segment_tree[i * 2 + 1]
+
+    def update(self, index, value):
+        index += self.n
+        self.segment_tree[index] = value
+        index //= 2
+        while index:
+            self.segment_tree[index] = self.segment_tree[2 * index] + self.segment_tree[2 * index + 1]
+            index //= 2
+
+    def query(self, left, right):
+        left += self.n
+        right += self.n
+        res = 0
+        while left <= right:
+            if left % 2:
+                res += self.segment_tree[left]
+                left += 1
+            if not right % 2:
+                res += self.segment_tree[right]
+                right -= 1
+
+            left //= 2
+            right //= 2
+
+        return res
 ```
