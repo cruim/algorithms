@@ -25,6 +25,7 @@
 - [Matrix Multiplication](#matrix-multiplication)
 - [Union Find](#union-find)
 - [Segment Tree](#segment-tree)
+- [Sparse Table](#sparse-table)
 
 
 ### Tree Traversals
@@ -532,4 +533,56 @@ class SegmentTree:
             right //= 2
 
         return res
+```
+
+### Sparse Table
+
+```python
+class SparseTable:
+
+    def __init__(self, nums: List):
+        self.n = len(nums)
+        self.log2 = [0] * (self.n+1)
+        for i in range(2, self.n+1):
+            self.log2[i] = self.log2[i//2] + 1
+        pow_two = 1
+        x = 2
+        while x * 2 <= self.n:
+            x *= 2
+            pow_two += 1
+        self.sp = [[float("inf")] * self.n for _ in range(pow_two + 1)]
+        self.it = [[float("inf")] * self.n for _ in range(pow_two + 1)]
+        for i in range(self.n):
+            self.sp[0][i] = nums[i]
+            self.it[0][i] = i
+
+        for p in range(1, pow_two + 1):
+            i = 0
+            while i + (1 << p) <= self.n:
+                left = self.sp[p - 1][i]
+                right = self.sp[p - 1][i + (1 << (p - 1))]
+                self.sp[p][i] = min(left, right)
+                if left <= right:
+                  self.it[p][i] = self.it[p - 1][i]
+                else:
+                  self.it[p][i] = self.it[p - 1][i + (1 << (p - 1))]
+                
+                i += 1
+
+    def query_min(self, left: int, right: int):
+        length = right - left + 1
+        p = self.log2[length]
+        k = 1 << p
+        return min(self.sp[p][left], self.sp[p][right-k+1])
+
+    def query_min_index(self, left, right):
+        length = right - left + 1
+        p = self.log2[length]
+        k = 1 << p
+        left_interval = self.sp[p][left]
+        right_interval = self.sp[p][right - k + 1]
+        if left_interval <= right_interval:
+            return self.it[p][left]
+        else:
+            return self.it[right - p + 1]
 ```
