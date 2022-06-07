@@ -563,9 +563,9 @@ class SparseTable:
                 right = self.sp[p - 1][i + (1 << (p - 1))]
                 self.sp[p][i] = min(left, right)
                 if left <= right:
-                  self.it[p][i] = self.it[p - 1][i]
+                    self.it[p][i] = self.it[p - 1][i]
                 else:
-                  self.it[p][i] = self.it[p - 1][i + (1 << (p - 1))]
+                    self.it[p][i] = self.it[p - 1][i + (1 << (p - 1))]
                 
                 i += 1
 
