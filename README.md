@@ -26,6 +26,7 @@
 - [Union Find](#union-find)
 - [Segment Tree](#segment-tree)
 - [Sparse Table](#sparse-table)
+- [Bridges in a graph](#bridges-in-a-graph)
 
 
 ### Tree Traversals
@@ -585,4 +586,46 @@ class SparseTable:
             return self.it[p][left]
         else:
             return self.it[right - p + 1]
+```
+
+### Bridges in a graph
+```python
+def find_bridges(n: int, connections: List[List[int]]) -> List[List[int]]:
+  bridges = []
+  adj_lst = {}
+  visited = set()
+  discovery_time = [float("inf")] * n
+  # low - min id from neighbours ids and itself id
+  low = [float("inf")] * n
+  parent = [-1] * n
+  time = 0
+  for x, y in connections:
+      adj_lst.setdefault(x, set()).add(y)
+      adj_lst.setdefault(y, set()).add(x)
+
+  def dfs(node, visited, parent, low, discovery_time):
+      nonlocal time
+      visited.add(node)
+      discovery_time[node] = low[node] = time
+      time += 1
+
+      for nei in adj_lst.get(node, []):
+          if nei not in visited:
+              parent[nei] = node
+              dfs(nei, visited, parent, low, discovery_time)
+
+              low[node] = min(low[nei], low[node])
+
+              # if nei_node doesn't connect to any node with less discover time than their edge is a bridge
+              if low[nei] > discovery_time[node]:
+                  bridges.append([node, nei])
+
+          elif nei != parent[node]:
+              low[node] = min(low[node], discovery_time[nei])
+
+  for node in range(n):
+      if node not in visited:
+          dfs(node, visited, parent, low, discovery_time)
+
+  return bridges
 ```
