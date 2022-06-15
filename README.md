@@ -27,6 +27,7 @@
 - [Segment Tree](#segment-tree)
 - [Sparse Table](#sparse-table)
 - [Bridges in a graph](#bridges-in-a-graph)
+- [Bipartite Graph](#bipartite-graph)
 
 
 ### Tree Traversals
@@ -628,4 +629,28 @@ def find_bridges(n: int, connections: List[List[int]]) -> List[List[int]]:
           dfs(node, visited, parent, low, discovery_time)
 
   return bridges
+```
+
+### Bipartite Graph
+```python
+from collections import deque
+
+
+def isBipartite(graph: List[List[int]]) -> bool:
+    n = len(graph)
+    colors = {}
+    for node in range(n):
+        if node not in colors:
+            colors[node] = False
+            queue = deque()
+            queue.append(node)
+            while queue:
+                node = queue.popleft()
+                for nei in graph[node]:
+                    if nei not in colors:
+                        queue.append(nei)
+                        colors[nei] = (not colors[node])
+                    elif colors[nei] == colors[node]:
+                        return False
+    return True
 ```
