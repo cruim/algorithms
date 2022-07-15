@@ -167,6 +167,57 @@ def bfs(grid: List[List[int]]) -> int:
     return steps[end]
 
 ```
+#### c++
+```python
+#include <bits/stdc++.h>
+using namespace std;
+
+
+class Solution {
+private:
+    struct pair_hash {
+    inline std::size_t operator()(const std::pair<int,int> & v) const {
+        return v.first*31+v.second;
+    }
+};
+public:
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        int res = 0;
+        unordered_set<pair<int, int>, pair_hash> visited;
+        
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<m; j++) {
+                if (grid[i][j] && !visited.count({i,j})) {
+                    visited.insert({i,j});
+                    queue<pair<int, int>> qq;
+                    qq.push(make_pair(i,j));
+                    int tmp = 0;
+                    while (!qq.empty()) {
+                        tmp += 1;
+                        auto node = qq.front();
+                        qq.pop();
+                        int a = node.first;
+                        int b = node.second;
+                        
+                        vector<pair<int, int>> tmp = {{a+1,b},{a-1,b},{a,b+1},{a,b-1}};
+                        for (auto [x,y]: tmp) {
+                            if (0<=x && x<n && 0<=y && y<m && grid[x][y] && !visited.count({x,y})) {
+                                visited.insert({x,y});
+                                qq.push({x,y});
+                            }
+                        }
+                    }
+                    res = max(res, tmp);
+                }
+            }
+        }
+        
+        return res;
+    }
+};
+```
 
 ### Depth First Search
 The idea is to get in destination point as soon as possible using `stack`. Good tool for collecting all paths. 
