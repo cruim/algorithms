@@ -28,6 +28,8 @@
 - [Sparse Table](#sparse-table)
 - [Bridges in a graph](#bridges-in-a-graph)
 - [Bipartite Graph](#bipartite-graph)
+- [Binary Addition](#binary-addition)
+- [Binary Subtraction](#binary-subtraction)
 
 
 ### Tree Traversals
@@ -704,4 +706,65 @@ def isBipartite(graph: List[List[int]]) -> bool:
                     elif colors[nei] == colors[node]:
                         return False
     return True
+```
+
+### Binary Addition
+```python
+res = []
+remainder = False
+for i, j in zip_longest(a, b, fillvalue='0'):
+    if i == j == '1':
+        if remainder:
+            res.append('1')
+        else:
+            res.append('0')
+            remainder = True
+    elif i == j == '0':
+        if remainder:
+            res.append('1')
+            remainder = False
+        else:
+            res.append('0')
+    else:
+        if remainder:
+            res.append('0')
+        else:
+            res.append('1')
+res.append('1') if remainder else None
+res.reverse()
+```
+
+### Binary Subtraction
+```python
+res = []
+if abs(second) > abs(first):
+    a, b = b, a
+    x, y = y, x
+    first, second = second, first
+borrow = False
+for i, j in zip_longest(a, b, fillvalue='0'):
+    if i == j == '0':
+        if borrow:
+            res.append('1')
+        else:
+            res.append('0')
+    elif i == j == '1':
+        if borrow:
+            res.append('1')
+        else:
+            res.append('0')
+    elif i == '1':
+        if borrow:
+            res.append('0')
+            borrow = False
+        else:
+            res.append('1')
+    else:
+        if borrow:
+            res.append('0')
+        else:
+            res.append('1')
+            borrow = True
+res[-1] = '0' if borrow else res[-1]
+res.reverse()
 ```
