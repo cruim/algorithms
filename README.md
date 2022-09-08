@@ -30,6 +30,7 @@
 - [Bipartite Graph](#bipartite-graph)
 - [Binary Addition](#binary-addition)
 - [Binary Subtraction](#binary-subtraction)
+- [MST Critical Edges](#mst-critical-edges)
 
 
 ### Tree Traversals
@@ -767,4 +768,33 @@ for i, j in zip_longest(a, b, fillvalue='0'):
             borrow = True
 res[-1] = '0' if borrow else res[-1]
 res.reverse()
+```
+
+### MST Critical Edges
+```python
+def findCriticalAndPseudoCriticalEdges(self, n: int, edges: List[List[int]]) -> List[List[int]]:
+        def mst(n, edges, skip_edge):
+            res = 0
+            uf = UnionFind(n)
+            for i in range(len(edges)):
+                if i == skip_edge:
+                    continue
+                if uf.union(edges[i][0],edges[i][1]):
+                    res += edges[i][2]
+            for i in range(1, n):
+                if not uf.connected(0,i):
+                    return float("inf")
+            return res
+        
+        # add original index
+        for i in range(len(edges)):
+            edges[i].append(i)
+        edges.sort(key=lambda x: x[2])
+        res = 0
+        # calculate mst tree weight
+        min_weight = mst(n, edges, -1)
+        for i in range(len(edges)):
+            # if weight of new mst more than min_weight this means that skip edge is required for mst
+            res +=  min_weight < mst(n, edges, i)
+        return res
 ```
