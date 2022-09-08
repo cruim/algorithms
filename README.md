@@ -30,6 +30,7 @@
 - [Bipartite Graph](#bipartite-graph)
 - [Binary Addition](#binary-addition)
 - [Binary Subtraction](#binary-subtraction)
+- [MST](#mst)
 - [MST Critical Edges](#mst-critical-edges)
 
 
@@ -768,6 +769,25 @@ for i, j in zip_longest(a, b, fillvalue='0'):
             borrow = True
 res[-1] = '0' if borrow else res[-1]
 res.reverse()
+```
+
+### MST
+```python
+def minCostConnectPoints(points: List[List[int]]) -> int:
+        heap = []
+        n = len(points)
+        for i, first in enumerate(points):
+            for j, second in enumerate(points[i+1:], i+1):
+                manhattan = abs(first[0]-second[0])+abs(first[1]-second[1])
+                heappush(heap, (manhattan,i,j))
+        
+        uf = UnionFind(n)
+        res = 0
+        while heap:
+            cost,x,y = heappop(heap)
+            if uf.union(x,y):
+                res += cost
+        return res
 ```
 
 ### MST Critical Edges
