@@ -32,6 +32,7 @@
 - [Binary Subtraction](#binary-subtraction)
 - [MST](#mst)
 - [MST Critical Edges](#mst-critical-edges)
+- [Is Prime Number](#is-prime-number)
 
 
 ### Tree Traversals
@@ -817,4 +818,15 @@ def findCriticalAndPseudoCriticalEdges(self, n: int, edges: List[List[int]]) -> 
             # if weight of new mst more than min_weight this means that skip edge is required for mst
             res +=  min_weight < mst(n, edges, i)
         return res
+```
+
+### Is Prime Number
+```python
+def is_prime(num):
+            if num == 1:
+                return False
+            for divisor in range(2, math.floor(math.sqrt(num)) + 1):
+                if num % divisor == 0:
+                    return False
+            return True
 ```
