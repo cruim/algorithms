@@ -33,6 +33,7 @@
 - [MST](#mst)
 - [MST Critical Edges](#mst-critical-edges)
 - [Is Prime Number](#is-prime-number)
+- [Adjacency List Bottom Up](#adjacency-list-bottom-up)
 
 
 ### Tree Traversals
@@ -829,4 +830,13 @@ def is_prime(num):
                 if num % divisor == 0:
                     return False
             return True
+```
+
+### Adjacency List Bottom Up
+```python
+adj_lst = {}
+for x,y in edges:
+    if y in adj_lst:
+        adj_lst.setdefault(x, []).append(y)
+    adj_lst.setdefault(y, []).append(x)
 ```
