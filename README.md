@@ -34,6 +34,7 @@
 - [MST Critical Edges](#mst-critical-edges)
 - [Is Prime Number](#is-prime-number)
 - [Adjacency List Bottom Up](#adjacency-list-bottom-up)
+- [Kadane’s Algorithm](#kadane’s-algorithm)
 
 
 ### Tree Traversals
@@ -824,19 +825,43 @@ def findCriticalAndPseudoCriticalEdges(self, n: int, edges: List[List[int]]) -> 
 ### Is Prime Number
 ```python
 def is_prime(num):
-            if num == 1:
-                return False
-            for divisor in range(2, math.floor(math.sqrt(num)) + 1):
-                if num % divisor == 0:
-                    return False
-            return True
+    if num == 1:
+        return False
+    for divisor in range(2, math.floor(math.sqrt(num)) + 1):
+        if num % divisor == 0:
+            return False
+    return True
 ```
 
 ### Adjacency List Bottom Up
 ```python
 adj_lst = {}
 for x,y in edges:
-    if y in adj_lst:
-        adj_lst.setdefault(x, []).append(y)
-    adj_lst.setdefault(y, []).append(x)
+  if y in adj_lst:
+      adj_lst.setdefault(x, []).append(y)
+  adj_lst.setdefault(y, []).append(x)
+```
+
+### Kadane’s Algorithm
+```python
+def maxSubarraySum(nums: List[int]) -> int:
+    mx = cur = nums[0]
+    for i in nums[1:]:
+        cur = max(cur+i, i)
+        mx = max(mx, cur)
+    return mx
+```
+```python
+def maxSubarraySumCircular(nums: List[int]) -> int:
+    mx = cur = nums[0]
+    for i in nums[1:]:
+        cur = max(cur+i, i)
+        mx = max(mx, cur)
+    mn = cur = nums[0]
+    for i in nums[1:]:
+        cur = min(cur+i, i)
+        mn = min(mn, cur)
+    if mn == sum(nums):
+        return mx
+    return max(mx, sum(nums)-mn)
 ```
