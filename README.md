@@ -35,6 +35,7 @@
 - [Is Prime Number](#is-prime-number)
 - [Adjacency List Bottom Up](#adjacency-list-bottom-up)
 - [Kadane’s Algorithm](#kadane’s-algorithm)
+- [Subarray Sums](#subarray-sums)
 
 
 ### Tree Traversals
@@ -864,4 +865,18 @@ def maxSubarraySumCircular(nums: List[int]) -> int:
     if mn == sum(nums):
         return mx
     return max(mx, sum(nums)-mn)
+```
+
+### Subarray Sums
+```python
+def subarraysDivByK(nums: List[int], k: int) -> int:
+    dct = {0: 1}
+    prefix = 0
+    res = 0
+    for i in nums:
+        prefix += i
+        x = prefix%k
+        res += dct.get(x, 0)
+        dct[x] = dct.get(x, 0) + 1
+    return res
 ```
