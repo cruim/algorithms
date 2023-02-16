@@ -36,6 +36,8 @@
 - [Adjacency List Bottom Up](#adjacency-list-bottom-up)
 - [Kadane’s Algorithm](#kadane’s-algorithm)
 - [Subarray Sums](#subarray-sums)
+- [Reverse Linked List](#reverse-linked-list)
+- [Monotonic Increasing Stack](#monotonic-increasing-stack)
 
 
 ### Tree Traversals
@@ -879,4 +881,34 @@ def subarraysDivByK(nums: List[int], k: int) -> int:
         res += dct.get(x, 0)
         dct[x] = dct.get(x, 0) + 1
     return res
+```
+
+### Reverse Linked List
+```python
+def fn(head):
+    curr = head
+    prev = None
+    while curr:
+        next_node = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next_node 
+        
+    return prev
+```
+
+### Monotonic Increasing Stack
+```python
+def fn(arr):
+    stack = []
+    ans = 0
+
+    for num in arr:
+        # for monotonic decreasing, just flip the > to <
+        while stack and stack[-1] > num:
+            # do logic
+            stack.pop()
+        stack.append(num)
+    
+    return ans
 ```
