@@ -38,6 +38,7 @@
 - [Subarray Sums](#subarray-sums)
 - [Reverse Linked List](#reverse-linked-list)
 - [Monotonic Increasing Stack](#monotonic-increasing-stack)
+- [Prime Factors](#prime-factors)
 
 
 ### Tree Traversals
@@ -911,4 +912,18 @@ def fn(arr):
         stack.append(num)
     
     return ans
+```
+
+### Prime Factors
+```python
+def prime_factors(n):
+    factors = set()
+    c = 2
+    while n > 1:
+        if not n % c:
+            factors.add(c)
+            n = n / c
+        else:
+            c = c + 1
+    return factors
 ```
