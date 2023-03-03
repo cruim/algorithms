@@ -39,6 +39,7 @@
 - [Reverse Linked List](#reverse-linked-list)
 - [Monotonic Increasing Stack](#monotonic-increasing-stack)
 - [Prime Factors](#prime-factors)
+- [All Subarrays](#all-subarrays)
 
 
 ### Tree Traversals
@@ -926,4 +927,21 @@ def prime_factors(n):
         else:
             c = c + 1
     return factors
+```
+
+### All Subarrays
+```python
+def generate_sublists(lst):
+      if len(lst) == 0:
+          return [[]]
+
+      sublists = []
+      first_element = lst[0]
+      rest_list = lst[1:]
+      sublists_of_rest = generate_sublists(rest_list)
+      for sublist in sublists_of_rest:
+          sublists.append([first_element] + sublist)
+      sublists.extend(sublists_of_rest)
+
+      return sublists
 ```
