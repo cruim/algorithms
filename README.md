@@ -40,7 +40,7 @@
 - [Monotonic Increasing Stack](#monotonic-increasing-stack)
 - [Prime Factors](#prime-factors)
 - [All Subarrays](#all-subarrays)
-- [Max points on same line](#max_points_on_same_line)
+- [Max points on same line](#max-points-on-same-line)
 
 
 ### Tree Traversals
