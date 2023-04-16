@@ -40,6 +40,7 @@
 - [Monotonic Increasing Stack](#monotonic-increasing-stack)
 - [Prime Factors](#prime-factors)
 - [All Subarrays](#all-subarrays)
+- [Max points on same line](#max_points_on_same_line)
 
 
 ### Tree Traversals
@@ -944,4 +945,20 @@ def generate_sublists(lst):
       sublists.extend(sublists_of_rest)
 
       return sublists
+```
+
+### Max points on same line
+```python
+def maxPoints(points: List[List[int]]) -> int:
+    n = len(points)
+    res = 0
+    for i in range(n):
+        a,b = points[i]
+        dct = {}
+        for j in range(i+1, n):
+            x,y = points[j]
+            slope = (a-x)/(b-y) if b-y else float("inf")
+            dct[slope] = dct.get(slope, 0) + 1
+            res = max(res, dct[slope])
+    return res+1
 ```
