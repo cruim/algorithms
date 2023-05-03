@@ -34,7 +34,7 @@
 - [MST Critical Edges](#mst-critical-edges)
 - [Is Prime Number](#is-prime-number)
 - [Adjacency List Bottom Up](#adjacency-list-bottom-up)
-- [Kadane’s Algorithm](#kadane’s-algorithm)
+- [Kadane Algorithm](#kadane-algorithm)
 - [Subarray Sums](#subarray-sums)
 - [Reverse Linked List](#reverse-linked-list)
 - [Monotonic Increasing Stack](#monotonic-increasing-stack)
@@ -848,7 +848,7 @@ for x,y in edges:
   adj_lst.setdefault(y, []).append(x)
 ```
 
-### Kadane’s Algorithm
+### Kadane Algorithm
 ```python
 def maxSubarraySum(nums: List[int]) -> int:
     mx = cur = nums[0]
