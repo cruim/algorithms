@@ -41,6 +41,7 @@
 - [Prime Factors](#prime-factors)
 - [All Subarrays](#all-subarrays)
 - [Max points on same line](#max-points-on-same-line)
+- [Next Permutation](#next-permutation)
 
 
 ### Tree Traversals
@@ -961,4 +962,27 @@ def maxPoints(points: List[List[int]]) -> int:
             dct[slope] = dct.get(slope, 0) + 1
             res = max(res, dct[slope])
     return res+1
+```
+
+### Next Permutation
+```python
+def nextPermutation(nums: List[int]) -> None:
+        # https://en.wikipedia.org/wiki/Permutation#Generation_in_lexicographic_order
+        n = len(nums)
+        i = n-2
+        while i >= 0 and nums[i+1] <= nums[i]:
+            i -= 1
+        if i < 0:
+            nums.reverse()
+            return
+        j = n-1
+        while j > i and nums[j] <= nums[i]:
+            j -= 1
+        nums[i],nums[j] = nums[j],nums[i]
+        i += 1
+        j = n-1
+        while i < j:
+            nums[i],nums[j] = nums[j],nums[i]
+            i += 1
+            j -= 1
 ```
