@@ -925,9 +925,9 @@ def prime_factors(n):
     while n > 1:
         if not n % c:
             factors.add(c)
-            n = n / c
+            n //= c
         else:
-            c = c + 1
+            c += 1
     return factors
 ```
 
