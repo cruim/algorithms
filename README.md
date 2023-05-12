@@ -42,6 +42,7 @@
 - [All Subarrays](#all-subarrays)
 - [Max points on same line](#max-points-on-same-line)
 - [Next Permutation](#next-permutation)
+- [Sieve of Eratosthenes](#sieve-of-eratosthenes)
 
 
 ### Tree Traversals
@@ -985,4 +986,21 @@ def nextPermutation(nums: List[int]) -> None:
             nums[i],nums[j] = nums[j],nums[i]
             i += 1
             j -= 1
+```
+
+
+### Sieve of Eratosthenes
+```python
+def sieve_of_eratosthenes(n):
+    if n < 2:
+        return []
+    non_prime = set()
+    for i in range(2, int(sqrt(n))+1):
+        if i in non_prime:
+            continue
+        j = i*2
+        while j <= n:
+            non_prime.add(j)
+            j += i
+    return [i for i in range(2, n+1) if i not in non_prime]
 ```
