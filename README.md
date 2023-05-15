@@ -490,7 +490,7 @@ class Trie:
 
 ### Catalan Number
 ```python
-Cn = (2n)! / n!(n+1)!
+res = factorial(2*n) // (factorial(n)*factorial(n+1))
 ```
 ```python
 def catalan(n):
