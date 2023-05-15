@@ -43,6 +43,7 @@
 - [Max points on same line](#max-points-on-same-line)
 - [Next Permutation](#next-permutation)
 - [Sieve of Eratosthenes](#sieve-of-eratosthenes)
+- [Bitwise operations](#bitwise-operations)
 
 
 ### Tree Traversals
@@ -1003,4 +1004,27 @@ def sieve_of_eratosthenes(n):
             non_prime.add(j)
             j += i
     return [i for i in range(2, n+1) if i not in non_prime]
+```
+
+
+### Bitwise operations
+```python
+# Set all bits
+(1 << n) - 1
+```
+```python
+# Check if i-th bit is set
+mask & (1 << i)
+```
+```python
+# Unset i-th bit
+new_mask = mask ^ (1 << i)
+```
+```python
+# Set i-th bit
+new_mask = mask | (1 << i)
+```
+```python
+# Unset most right bit
+x & (x - 1)
 ```
