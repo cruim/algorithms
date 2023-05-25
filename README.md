@@ -44,6 +44,7 @@
 - [Next Permutation](#next-permutation)
 - [Sieve of Eratosthenes](#sieve-of-eratosthenes)
 - [Bitwise operations](#bitwise-operations)
+- [Tricks](#tricks)
 
 
 ### Tree Traversals
@@ -1027,4 +1028,20 @@ new_mask = mask | (1 << i)
 ```python
 # Unset most right bit
 x & (x - 1)
+```
+
+### Tricks
+```python
+# Sort before Counter to avoid collision and n^2
+nums.sort()
+cnt = Counter(nums)
+```
+```python
+# Unpack set to string
+print(*st)
+```
+```python
+# Prefix multi
+x = x * st[i] % mod
+x = x * pow(st[i - m], mod - 2, mod) % mod
 ```
