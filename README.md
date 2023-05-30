@@ -1041,6 +1041,10 @@ x = (x - 1) | x
 # Convert x to -x
 x = (~x) + 1
 ```
+```python
+# Number of islands
+((n&1)+(n^(n>>1)).bit_count())>>1
+```
 
 ### Tricks
 ```python
@@ -1056,8 +1060,4 @@ print(*st)
 # Prefix multi
 x = x * st[i] % mod
 x = x * pow(st[i - m], mod - 2, mod) % mod
-```
-```python
-# Number of islands
-((n&1)+(n^(n>>1)).bit_count())>>1
 ```
