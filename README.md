@@ -1026,8 +1026,20 @@ new_mask = mask ^ (1 << i)
 new_mask = mask | (1 << i)
 ```
 ```python
+# Flip i-th bit
+x = (x << i) ^ x
+```
+```python
 # Unset most right bit
 x & (x - 1)
+```
+```python
+# Convert trailing 0's to 1's
+x = (x - 1) | x
+```
+```python
+# Convert x to -x
+x = (~x) + 1
 ```
 
 ### Tricks
@@ -1044,4 +1056,8 @@ print(*st)
 # Prefix multi
 x = x * st[i] % mod
 x = x * pow(st[i - m], mod - 2, mod) % mod
+```
+```python
+# Number of islands
+((n&1)+(n^(n>>1)).bit_count())>>1
 ```
