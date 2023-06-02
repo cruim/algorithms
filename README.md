@@ -44,6 +44,7 @@
 - [Next Permutation](#next-permutation)
 - [Sieve of Eratosthenes](#sieve-of-eratosthenes)
 - [Detect cycle directed](#detect-cycle-directed)
+- [Detect cycle undirected](#detect-cycle-undirected)
 - [Bitwise operations](#bitwise-operations)
 - [Tricks](#tricks)
 
@@ -1011,45 +1012,89 @@ def sieve_of_eratosthenes(n):
 
 ### Detect cycle directed
 ```python
-def detect_cycle(self, n):
-    colors = [0]*n
-    adj_lst = {}
-    parent = []
-    self.cycle_end = None
-    self.cycle_start = None
+class Solution:
+  def detect_cycle(self, n):
+      colors = [0]*n
+      adj_lst = {}
+      parent = []
+      self.cycle_end = None
+      self.cycle_start = None
+  
+      def dfs(node):
+          colors[node] = 1
+          for nei in adj_lst.get(node, []):
+              if not colors[nei] == 0:
+                  parent[nei] = node
+                  if dfs(nei):
+                      return True
+                  elif colors[nei] == 1:
+                      self.cycle_end = node
+                      self.cycle_start = nei
+                      return True
+          colors[node] = 2
+  
+          return False
+  
+      for node in range(n):
+          if not colors[node] and dfs(node):
+              break
+  
+      if self.cycle_start is None:
+          return "No cycles"
+      else:
+          cycle = [self.cycle_start]
+          node = parent[self.cycle_start]
+          while node != self.cycle_start:
+              cycle.append(node)
+              node = parent[node]
+          cycle.reverse()
+  
+          return cycle
+```
 
-    def dfs(node):
-        colors[node] = 1
-        for nei in adj_lst.get(node, []):
-            if not colors[nei] == 0:
-                parent[nei] = node
-                if dfs(nei):
-                    return True
-                elif colors[nei] == 1:
+
+### Detect cycle undirected
+```python
+class Solution:
+
+    def detect_cycle(self, n):
+        adj_lst = {}
+        parent = []
+        visited = set()
+        self.cycle_end = None
+        self.cycle_start = None
+
+        def dfs(node, parent):
+            visited.add(node)
+            for nei in adj_lst.get(node, []):
+                if nei == parent:
+                    continue
+                if nei in visited:
                     self.cycle_end = node
                     self.cycle_start = nei
                     return True
-        colors[node] = 2
+                parent[nei] = node
+                if dfs(nei, node):
+                    return True
 
-        return False
+            return False
 
-    for node in range(n):
-        if not colors[node] and dfs(node):
-            break
+        for node in range(n):
+            if node not in visited and dfs(node, -1):
+                break
 
-    if self.cycle_start is None:
-        return "No cycles"
-    else:
-        cycle = [self.cycle_start]
-        node = parent[self.cycle_start]
-        while node != self.cycle_start:
-            cycle.append(node)
-            node = parent[node]
-        cycle.reverse()
+        if self.cycle_start is None:
+            return "No cycles"
+        else:
+            cycle = [self.cycle_start]
+            node = parent[self.cycle_start]
+            while node != self.cycle_start:
+                cycle.append(node)
+                node = parent[node]
+            cycle.reverse()
 
-        return cycle
+            return cycle
 ```
-
 
 ### Bitwise operations
 ```python
