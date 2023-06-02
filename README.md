@@ -43,6 +43,7 @@
 - [Max points on same line](#max-points-on-same-line)
 - [Next Permutation](#next-permutation)
 - [Sieve of Eratosthenes](#sieve-of-eratosthenes)
+- [Detect cycle directed](#detect-cycle-directed)
 - [Bitwise operations](#bitwise-operations)
 - [Tricks](#tricks)
 
@@ -1005,6 +1006,48 @@ def sieve_of_eratosthenes(n):
             non_prime.add(j)
             j += i
     return [i for i in range(2, n+1) if i not in non_prime]
+```
+
+
+### Detect cycle directed
+```python
+def detect_cycle(self, n):
+    colors = [0]*n
+    adj_lst = {}
+    parent = []
+    self.cycle_end = None
+    self.cycle_start = None
+
+    def dfs(node):
+        colors[node] = 1
+        for nei in adj_lst.get(node, []):
+            if not colors[nei] == 0:
+                parent[nei] = node
+                if dfs(nei):
+                    return True
+                elif colors[nei] == 1:
+                    self.cycle_end = node
+                    self.cycle_start = nei
+                    return True
+        colors[node] = 2
+
+        return False
+
+    for node in range(n):
+        if not colors[node] and dfs(node):
+            break
+
+    if self.cycle_start is None:
+        return "No cycles"
+    else:
+        cycle = [self.cycle_start]
+        node = parent[self.cycle_start]
+        while node != self.cycle_start:
+            cycle.append(node)
+            node = parent[node]
+        cycle.reverse()
+
+        return cycle
 ```
 
 
