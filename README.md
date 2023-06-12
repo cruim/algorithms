@@ -1149,3 +1149,15 @@ print(*st)
 x = x * st[i] % mod
 x = x * pow(st[i - m], mod - 2, mod) % mod
 ```
+```python
+# Sum of distances between all points
+nums.sort()
+pref = 0
+res = 0
+mod = 10**9-7
+n = len(nums)
+for i in range(n):
+    res += nums[i]*i-pref
+    res %= mod
+    pref += nums[i]
+```
