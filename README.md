@@ -45,6 +45,7 @@
 - [Sieve of Eratosthenes](#sieve-of-eratosthenes)
 - [Detect cycle directed](#detect-cycle-directed)
 - [Detect cycle undirected](#detect-cycle-undirected)
+- [Hungarian algorithm](#hungarian-algorithm)
 - [Bitwise operations](#bitwise-operations)
 - [Tricks](#tricks)
 
@@ -1094,6 +1095,26 @@ class Solution:
             cycle.reverse()
 
             return cycle
+```
+
+### Hungarian algorithm
+```python
+def maximumInvitations(grid: List[List[int]]) -> int:
+        dct = {}
+        n = len(grid)
+        
+        def hungarian(node,visited):
+            for j in range(len(grid[0])):
+                if grid[node][j] and j not in visited:
+                    visited.add(j)
+                    if j not in dct or hungarian(dct[j], visited):
+                        dct[j] = node
+                        return True
+                    
+        for node in range(n):
+            hungarian(node,set())
+        
+        return len(dct)
 ```
 
 ### Bitwise operations
