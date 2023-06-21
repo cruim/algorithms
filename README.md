@@ -46,6 +46,7 @@
 - [Detect cycle directed](#detect-cycle-directed)
 - [Detect cycle undirected](#detect-cycle-undirected)
 - [Hungarian algorithm](#hungarian-algorithm)
+- [Polygon is Convex](#polygon-is-convex)
 - [Bitwise operations](#bitwise-operations)
 - [Tricks](#tricks)
 
@@ -1115,6 +1116,31 @@ def maximumInvitations(grid: List[List[int]]) -> int:
             hungarian(node,set())
         
         return len(dct)
+```
+
+### Polygon is Convex
+```python
+def isConvex(points: List[List[int]]) -> bool:
+        from operator import sub
+        
+        def ccw(a, b, c):
+            a, c = tuple(map(sub, a, b)), tuple(map(sub, c, b))
+            return a[0]*c[1]-a[1]*c[0]
+        
+        diff = None
+        
+        n = len(points)
+        
+        for i in range(n):
+            cur = ccw(points[i-2], points[i-1], points[i])
+            if not cur:
+                continue
+            if not diff:
+                diff = cur
+            if cur*diff < 0:
+                return False
+            
+        return True
 ```
 
 ### Bitwise operations
