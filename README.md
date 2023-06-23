@@ -47,6 +47,7 @@
 - [Detect cycle undirected](#detect-cycle-undirected)
 - [Hungarian algorithm](#hungarian-algorithm)
 - [Polygon is Convex](#polygon-is-convex)
+- [Longest Arithmetic Subsequence](#longest-arithmetic-subsequence)
 - [Bitwise operations](#bitwise-operations)
 - [Tricks](#tricks)
 
@@ -1141,6 +1142,20 @@ def isConvex(points: List[List[int]]) -> bool:
                 return False
             
         return True
+```
+
+### Longest Arithmetic Subsequence
+```python
+def longestArithSeqLength(nums: List[int]) -> int:
+        res = 2
+        dp = {}
+        n = len(nums)
+        for i in range(n):
+            for j in range(i+1,n):
+                diff = nums[j]-nums[i]
+                dp[(j,diff)] = dp.get((i,diff),1)+1
+                res = max(res, dp[(j,diff)])
+        return res
 ```
 
 ### Bitwise operations
