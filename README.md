@@ -999,17 +999,15 @@ def nextPermutation(nums: List[int]) -> None:
 ### Sieve of Eratosthenes
 ```python
 def sieve_of_eratosthenes(n):
-    if n < 2:
-        return []
-    non_prime = set()
-    for i in range(2, int(sqrt(n))+1):
-        if i in non_prime:
-            continue
-        j = i*2
-        while j <= n:
-            non_prime.add(j)
-            j += i
-    return [i for i in range(2, n+1) if i not in non_prime]
+    sieve = [True] * n
+    for i in range(3, int(n**0.5) + 1, 2):
+        if sieve[i]:
+            sieve[i * i :: 2 * i] = [False] * ((n - i * i - 1) // (2 * i) + 1)
+    dct = {2:2}
+    for i in range(3, n, 2):
+        if sieve[i]:
+            dct[i] = i
+    return dct
 ```
 
 
