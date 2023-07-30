@@ -18,6 +18,7 @@
 - [Binary Search Rotated](#binary-search-rotated)
 
 - [Prefix Sum](#prefix-sum)
+- [Prefix Sum and Freq Table](#prefix-sum-and-freq-table)
 - [Longest Common Subsequence](#longest-common-subsequence)
 - [Longest Increasing subsequence](#longest-increasing-subsequence)
 - [Levenshtein distance](#levenshtein-distance)
@@ -893,6 +894,19 @@ def subarraysDivByK(nums: List[int], k: int) -> int:
         res += dct.get(x, 0)
         dct[x] = dct.get(x, 0) + 1
     return res
+```
+
+### Prefix Sum and Freq Table
+```python
+def fixedRatio(self, s: str, num1: int, num2: int) -> int:
+        dct = {0: 1}
+        prefix = 0
+        res = 0
+        for i in s:
+            prefix += num1 if i == '1' else -num2
+            res += dct.get(prefix, 0)
+            dct[prefix] = dct.get(prefix, 0) + 1
+        return res
 ```
 
 ### Reverse Linked List
