@@ -51,6 +51,7 @@
 - [Longest Arithmetic Subsequence](#longest-arithmetic-subsequence)
 - [Bitwise operations](#bitwise-operations)
 - [Tricks](#tricks)
+- [Points on the same line](#max-points-on-same-line)
 
 
 ### Tree Traversals
@@ -1234,4 +1235,16 @@ for i in range(n):
     res += nums[i]*i-pref
     res %= mod
     pref += nums[i]
+```
+
+### Points on the same line
+```python
+def checkStraightLine(self, arr: List[List[int]]) -> bool:
+    x0, x1 = arr[0][0], arr[1][0]
+    y0, y1 = arr[0][1], arr[1][1]
+    
+    for x, y in arr[2:]:
+        if (x1 - x0) * (y - y1) != (x - x1) * (y1 - y0):
+            return False
+    return True
 ```
