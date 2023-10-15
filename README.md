@@ -52,6 +52,7 @@
 - [Bitwise operations](#bitwise-operations)
 - [Tricks](#tricks)
 - [Points on the same line](#max-points-on-same-line)
+- [Prefix Suffix sum](#prefix-suffix-sum)
 
 
 ### Tree Traversals
@@ -1247,4 +1248,23 @@ def checkStraightLine(self, arr: List[List[int]]) -> bool:
         if (x1 - x0) * (y - y1) != (x - x1) * (y1 - y0):
             return False
     return True
+```
+
+### Prefix Suffix sum]
+```python
+def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:
+        mod = 12345
+        n,m = len(grid),len(grid[0])
+        res = [[1]*m for _ in range(n)]
+        pref = 1
+        for i in range(n):
+            for j in range(m):
+                res[i][j] = pref
+                pref = (pref*grid[i][j])%mod
+        suff = 1
+        for i in range(n-1,-1,-1):
+            for j in range(m-1,-1,-1):
+                res[i][j] = (res[i][j]*suff)%mod
+                suff = (suff*grid[i][j])%mod
+        return res
 ```
