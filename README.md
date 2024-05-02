@@ -53,6 +53,7 @@
 - [Tricks](#tricks)
 - [Points on the same line](#max-points-on-same-line)
 - [Prefix Suffix sum](#prefix-suffix-sum)
+- [Longest Common Contiguous substring](#longest-common-contiguous-substring)
 
 
 ### Tree Traversals
@@ -1250,21 +1251,40 @@ def checkStraightLine(self, arr: List[List[int]]) -> bool:
     return True
 ```
 
-### Prefix Suffix sum]
+### Prefix Suffix sum
 ```python
 def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:
-        mod = 12345
-        n,m = len(grid),len(grid[0])
-        res = [[1]*m for _ in range(n)]
-        pref = 1
-        for i in range(n):
-            for j in range(m):
-                res[i][j] = pref
-                pref = (pref*grid[i][j])%mod
-        suff = 1
-        for i in range(n-1,-1,-1):
-            for j in range(m-1,-1,-1):
-                res[i][j] = (res[i][j]*suff)%mod
-                suff = (suff*grid[i][j])%mod
-        return res
+      mod = 12345
+      n,m = len(grid),len(grid[0])
+      res = [[1]*m for _ in range(n)]
+      pref = 1
+      for i in range(n):
+          for j in range(m):
+              res[i][j] = pref
+              pref = (pref*grid[i][j])%mod
+      suff = 1
+      for i in range(n-1,-1,-1):
+          for j in range(m-1,-1,-1):
+              res[i][j] = (res[i][j]*suff)%mod
+              suff = (suff*grid[i][j])%mod
+      return res
+```
+
+### Longest Common Contiguous substring
+```python
+def longest_common_contiguous_substring(s1, s2):
+    m = len(s1)
+    n = len(s2)
+
+    lcs_lengths = [[0] * (n + 1) for _ in range(m + 1)]
+
+    max_length = 0
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if s1[i - 1] == s2[j - 1]:
+                lcs_lengths[i][j] = lcs_lengths[i - 1][j - 1] + 1
+                max_length = max(max_length, lcs_lengths[i][j])
+
+    return max_length
 ```
