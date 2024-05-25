@@ -1192,7 +1192,7 @@ new_mask = mask | (1 << i)
 ```
 ```python
 # Flip i-th bit
-x = (x << i) ^ x
+x = x ^ (1 << i)
 ```
 ```python
 # Unset most right bit
