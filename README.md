@@ -54,6 +54,7 @@
 - [Points on the same line](#max-points-on-same-line)
 - [Prefix Suffix sum](#prefix-suffix-sum)
 - [Longest Common Contiguous substring](#longest-common-contiguous-substring)
+- [Eulerian Path](#eulerian-path)
 
 
 ### Tree Traversals
@@ -1287,4 +1288,34 @@ def longest_common_contiguous_substring(s1, s2):
                 max_length = max(max_length, lcs_lengths[i][j])
 
     return max_length
+```
+
+### Eulerian Path
+```python
+def validArrangement(self, pairs: List[List[int]]) -> List[List[int]]:
+    adj_lst = defaultdict(list)
+    income_count = defaultdict(int)
+    
+    for x,y in pairs:
+        adj_lst[x].append(y)
+        income_count[x] += 1
+        income_count[y] -= 1
+    
+    start = pairs[0][0] # default value if it is eulerian circle
+    for node, value in income_count.items():
+        if value == 1:
+            start = node
+            break
+    
+    res = []
+    stack = [start]
+    
+    while stack:
+        while adj_lst[stack[-1]]:
+            stack.append(adj_lst[stack[-1]].pop())
+        res.append(stack.pop())
+    
+    res.reverse()
+    
+    return [[res[i],res[i+1]] for i in range(len(res)-1)]
 ```
