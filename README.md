@@ -1185,7 +1185,7 @@ mask & (1 << i)
 ```
 ```python
 # Unset i-th bit
-new_mask = mask ^ (1 << i)
+new_mask = mask & ~(1 << i)
 ```
 ```python
 # Set i-th bit
@@ -1197,7 +1197,7 @@ x = x ^ (1 << i)
 ```
 ```python
 # Unset most right bit
-mask & ~(1 << i)
+x & (x - 1)
 ```
 ```python
 # Convert trailing 0's to 1's
