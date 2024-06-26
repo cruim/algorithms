@@ -1197,7 +1197,7 @@ x = x ^ (1 << i)
 ```
 ```python
 # Unset most right bit
-x & (x - 1)
+mask & ~(1 << i)
 ```
 ```python
 # Convert trailing 0's to 1's
