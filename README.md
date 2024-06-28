@@ -15,11 +15,14 @@
 - [Linked List](#linked-list)
 - [Trie](#trie)
 - [Binary Search](#binary-search)
+- [Bisect Left](#bisect-left)
+- [Bisect Right](#bisect-right)
 - [Binary Search Rotated](#binary-search-rotated)
 
 - [Prefix Sum](#prefix-sum)
 - [Prefix Sum and Freq Table](#prefix-sum-and-freq-table)
 - [Longest Common Subsequence](#longest-common-subsequence)
+- [LCS](#l-s-c)
 - [Longest Increasing subsequence](#longest-increasing-subsequence)
 - [Levenshtein distance](#levenshtein-distance)
 - [Catalan number](#catalan-number)
@@ -305,6 +308,34 @@ def binary_search(nums, value):
     return -1
 ```
 
+### Bisect Left
+```python
+def bin_left(x):
+    low = 0
+    high = len(nums)
+    while low < high:
+        mid = (low+high)>>1
+        if nums[mid] < x: 
+            low = mid+1
+        else: 
+            high = mid
+    return low
+```
+
+### Bisect Right
+```python
+def bin_right(x):
+    low = 0
+    high = len(nums)
+    while low < high:
+        mid = (low+high)>>1
+        if x < nums[mid]: 
+            high = mid
+        else: 
+            low = mid+1
+    return low
+```
+
 ### Binary Search Rotated
 ```python
 def bin_search_rotated(nums: List[int], target: int) -> int:
@@ -355,6 +386,17 @@ def lsc(A: str, B: str) -> int:
                 grid[i][j] = max(grid[i - 1][j], grid[i][j - 1])
 
     return grid[-1][-1]
+```
+
+### LCS
+```python
+dp = [["" for _ in range(m + 1)] for _ in range(n + 1)]
+for i in range(n):
+    for j in range(m):
+        if s[i] == t[j]:
+            dp[i + 1][j + 1] = dp[i][j] + s[i]
+        else:
+            dp[i + 1][j + 1] = max(dp[i + 1][j], dp[i][j + 1], key=len)
 ```
 
 ### Longest Increasing subsequence
