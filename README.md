@@ -58,6 +58,7 @@
 - [Prefix Suffix sum](#prefix-suffix-sum)
 - [Longest Common Contiguous substring](#longest-common-contiguous-substring)
 - [Eulerian Path](#eulerian-path)
+- [Sum Of All Consecutive Subarrays](sum-of-all-consecutive-subarrays)
 
 
 ### Tree Traversals
@@ -1360,4 +1361,14 @@ def validArrangement(self, pairs: List[List[int]]) -> List[List[int]]:
     res.reverse()
     
     return [[res[i],res[i+1]] for i in range(len(res)-1)]
+```
+
+### Sum Of All Consecutive Subarrays
+```python
+def sum_of_consecutive_subarrays(nums):
+    x = 0
+    n = len(nums)
+    for i in range(n):
+        x += nums[i]*(i+1)*(n-i)
+    return x
 ```
