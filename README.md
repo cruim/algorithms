@@ -1380,11 +1380,9 @@ def sum_of_distances(points):
     points.sort()
     n = len(points)
     
-    # Вычисляем S_1 (сумма расстояний от первой точки)
     S = [0] * n
     S[0] = sum(points[i] - points[0] for i in range(1, n))  # O(n)
 
-    # Вычисляем все остальные S_i за O(n)
     for i in range(1, n):
         S[i] = S[i - 1] + (2 * i - n) * (points[i] - points[i - 1])
     
