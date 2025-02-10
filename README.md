@@ -58,7 +58,8 @@
 - [Prefix Suffix sum](#prefix-suffix-sum)
 - [Longest Common Contiguous substring](#longest-common-contiguous-substring)
 - [Eulerian Path](#eulerian-path)
-- [Sum Of All Consecutive Subarrays](sum-of-all-consecutive-subarrays)
+- [Sum Of All Consecutive Subarrays](#sum-of-all-consecutive-subarrays)
+- [Sum Of Distances To All Points](#sum-of-distances-to-all-points)
 
 
 ### Tree Traversals
@@ -1371,4 +1372,21 @@ def sum_of_consecutive_subarrays(nums):
     for i in range(n):
         x += nums[i]*(i+1)*(n-i)
     return x
+```
+
+### Sum Of Distances To All Points
+```python
+def sum_of_distances(points):
+    points.sort()
+    n = len(points)
+    
+    # Вычисляем S_1 (сумма расстояний от первой точки)
+    S = [0] * n
+    S[0] = sum(points[i] - points[0] for i in range(1, n))  # O(n)
+
+    # Вычисляем все остальные S_i за O(n)
+    for i in range(1, n):
+        S[i] = S[i - 1] + (2 * i - n) * (points[i] - points[i - 1])
+    
+    return S
 ```
